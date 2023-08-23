@@ -4,6 +4,7 @@
 #include <iostream>
 #include <locale.h>
 #include <conio.h>
+#include <windows.h>
 
 #define ANSI_BACKGROUND_BLUE "\033[42m"
 #define ANSI_BACKGROUND_RESET "\033[0m"
@@ -99,6 +100,110 @@ struct DatosGen{
   
 };
 
+void gotoxy(int x, int y) {
+    COORD coord;
+    coord.X = x;
+    coord.Y = y;
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+}
+
+void lineasV(int c,int f){
+	int i;
+	for(i=1;i<f;i++){
+		gotoxy(c,i);
+		printf("%c",186);
+	}
+}
+
+void lineasV2(int c,int f){
+	int i;
+	for(i=1;i<f;i++){
+		gotoxy(c,i);
+		printf("%c",176);
+	}
+}
+
+void lineasV3(int c,int f){
+	int i;
+	for(i=1;i<f;i++){
+		gotoxy(c,i);
+		printf("%c",4);
+	}
+}
+
+void lineasH(int c,int f){
+	int i;
+	for(i=1;i<c;i++){
+		gotoxy(i,f);
+		printf("%c",4);
+	}
+}
+
+void lineasH2(int c,int f){
+	int i;
+	for(i=1;i<c;i++){
+		gotoxy(i,f);
+		printf("%c",207);
+	}
+}
+
+void Caratula(){
+	lineasV(1,24);
+	lineasV(80,24);
+	
+	lineasV2(3, 24);
+	lineasV2(78, 24);
+	
+	lineasV3(5, 24);
+	lineasV3(76, 24);
+	
+	lineasH(80,1);
+	lineasH(80,24);
+	
+	gotoxy(1,1);
+	printf("%c",201);
+	
+	gotoxy(1,24);
+	printf("%c",200);
+	
+	gotoxy(80, 1);
+	printf("%c",187);
+	
+	gotoxy(80, 24);
+	printf("%c",188);
+	
+	gotoxy(20, 4);
+	printf("UNIVERSIDAD DE LAS FUERZAS ARMADAS - ESPE");
+	
+	gotoxy(25, 6);
+	printf("FUNDAMENTOS DE LA PROGRAMACION");
+	
+	gotoxy(30, 8);
+	printf("%c %c %c %c %c %c %c %c %c %c %c",3,3,3,3,3,3,3,3,3,3,3,3);
+	
+	gotoxy(35, 9);
+	printf("MECATRONICA");
+	
+	gotoxy(35, 11);
+	printf("INTEGRANTES:");
+	
+	gotoxy(34, 12);
+	printf("BARAJA MILENA");
+	
+	gotoxy(34, 13);
+	printf("BUITRÓN ANDRÉS");
+	
+	gotoxy(23, 15);
+	printf("DOCENTE: EDGAR FERNANDO SOLIS ACOSTA");
+
+	gotoxy(36, 17);
+	printf("NRC: 9890");
+	
+	gotoxy(30, 19);
+	printf("%c %c %c %c %c %c %c %c %c %c %c",223,223, 223, 223, 223, 223, 223, 223,223, 223, 223, 223);
+	
+}
+
 void ingresarDatosEst(struct DatosGen *datosgen, int j){
 
   printf("-------------------------------------------------------------------------\n\t\t   Ingreso de datos del estudiante %d:\n-------------------------------------------------------------------------\n",j);
@@ -126,14 +231,6 @@ void ingresarDatosEst(struct DatosGen *datosgen, int j){
   printf("\nTelefono:\n");
   fflush(stdin);
   scanf("%d", &datosgen->estudiante.telefono);
-  
-  printf("\nID:\n");
-  fflush(stdin);
-  scanf("%d", &datosgen->estudiante.id);
-  
-  printf("\nCorreo:\n");		//mas adelante tenemos que hacer que se muestre un correo generado automaticamente con el nombre proporcionado
-  fflush(stdin);
-  gets(datosgen->estudiante.correo);
   
   
   //ingreso de materias y nrc
@@ -275,6 +372,19 @@ void ingresarDatosDoc(struct DatosGen *datosgen, int j){
 //------------MENU TECLADO
 
 void mostrarMenu(int opcionActual){
+	lineasV(1,24);
+	lineasV(80,24);
+	
+	lineasV2(3, 24);
+	lineasV2(78, 24);
+	
+	lineasV3(5, 24);
+	lineasV3(76, 24);
+	
+	lineasH(80,1);
+	lineasH(80,24);
+	
+	gotoxy(20,3);
 	printf("\t SISTEMA ESCOLASTICO\n\n");	
 	for (int i=1; i<=5; i++){
 		if(i==opcionActual){
@@ -286,22 +396,26 @@ void mostrarMenu(int opcionActual){
 		switch(i){
 			
 		case 1:
-			cout<<"VER DATOS DE UN ESTUDIANTE"<<endl;
+			gotoxy(20, 5);
+			cout<<"ESTUDIANTE"<<endl;
 			break;
 		case 2:
-			cout<<"VER DATOS DE UN DOCENTE"<<endl;
+			gotoxy(20,6);
+			cout<<"DOCENTE"<<endl;
 			break;
 		case 3:
+			gotoxy(20,7);
 			cout<<"INGRESAR ESTUDIANTES"<<endl;
 			break;
 		case 4:
+			gotoxy(20,8);
 			cout<<"INGRESAR DOCENTES"<<endl;
 			break;
 		case 5:
+			gotoxy(20,9);
 			cout<<"SALIR"<<ANSI_BACKGROUND_RESET<<endl;
 			break;
 		}
-			
 	}
 }
 
@@ -317,6 +431,19 @@ void regresarMenu (){
 }
 
 void mostrarMenuEstudiante(int opcionActual){
+	lineasV(1,24);
+	lineasV(80,24);
+	
+	lineasV2(3, 24);
+	lineasV2(78, 24);
+	
+	lineasV3(5, 24);
+	lineasV3(76, 24);
+	
+	lineasH(80,1);
+	lineasH(80,24);
+	
+	gotoxy(20,3);
 	printf("\t ESTUDIANTE\n\n");	
 	for (int i=1; i<=3; i++){
 		if(i==opcionActual){
@@ -328,12 +455,15 @@ void mostrarMenuEstudiante(int opcionActual){
 		switch(i){
 			
 		case 1:
+			gotoxy(20,5);
 			cout<<"VER INFORMACIÓN DEL ESTUDIANTE"<<endl;
 			break;
 		case 2:
+			gotoxy(20,6);
 			cout<<"NOTAS"<<endl;
 			break;
 		case 3:
+			gotoxy(20,7);
 			cout<<"SALIR"<<ANSI_BACKGROUND_RESET<<endl;
 			break;
 		}
@@ -350,10 +480,10 @@ int menuEstudiante(){
 		char tecla = _getch();
 		switch(tecla){
 			case 72: //tecla pa arriba
-				opcionActual = (opcionActual >1)? opcionActual - 1:5;
+				opcionActual = (opcionActual >1)? opcionActual - 1:3;
 				break;
 			case 80: //pa abajo
-				opcionActual = (opcionActual <5)? opcionActual + 1:1;
+				opcionActual = (opcionActual <3)? opcionActual + 1:1;
 				break;
 			case 13:
 				system("cls");
@@ -382,7 +512,20 @@ int menuEstudiante(){
 }
 
 void mostrarMenuDocente(int opcionActual){
-	printf("\t ESTUDIANTE\n\n");	
+	lineasV(1,24);
+	lineasV(80,24);
+	
+	lineasV2(3, 24);
+	lineasV2(78, 24);
+	
+	lineasV3(5, 24);
+	lineasV3(76, 24);
+	
+	lineasH(80,1);
+	lineasH(80,24);
+	
+	gotoxy(20,3);
+	printf("\t DOCENTE\n\n");	
 	for (int i=1; i<=3; i++){
 		if(i==opcionActual){
 			cout<<ANSI_BACKGROUND_BLUE;
@@ -393,12 +536,15 @@ void mostrarMenuDocente(int opcionActual){
 		switch(i){
 			
 		case 1:
+			gotoxy(20,5);
 			cout<<"VER INFORMACIÓN DEL DOCENTE"<<endl;
 			break;
 		case 2:
+			gotoxy(20,6);
 			cout<<"INGRESAR NOTAS"<<endl;
 			break;
 		case 3:
+			gotoxy(20,7);
 			cout<<"SALIR"<<ANSI_BACKGROUND_RESET<<endl;
 			break;
 		}
@@ -425,7 +571,21 @@ int menuDocente(){
 				
 				switch(opcionActual){
 					case 1: {
+						lineasV(1,24);
+						lineasV(80,24);
+						
+						lineasV2(3, 24);
+						lineasV2(78, 24);
+						
+						lineasV3(5, 24);
+						lineasV3(76, 24);
+						
+						lineasH(80,1);
+						lineasH(80,24);
+						
+						gotoxy(20,3);
 						cout<< "\t INFO DEL PROFE" << endl;
+						gotoxy(10, 5);
 						printf("ingresar la funcion para mostrar la información");
 					break;
 					}
@@ -527,6 +687,13 @@ int opcionActual=1;
 
 int main(){
 	setlocale(LC_ALL,("spanish"));
+	
+	Caratula();
+	getch();
 	operarMenu();
+	
+	getch();
+	
 	return 0;
 }
+
